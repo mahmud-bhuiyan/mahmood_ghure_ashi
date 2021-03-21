@@ -1,18 +1,13 @@
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 	<div class="container">
 		<div class="login-box">
-			<div class="row">
+			<div class="row" style="margin: 3% 0;">
 				<div class="col-md-12">
-					<center><h2 style="color:blue">User Register & Sign in</h2></center>
+					<center><h2 style="color:#F78536">User Register & Sign in</h2></center>
 				</div>
-				<div class="col-md-6 login-left">
-					<h2 style="color:black">Login</h2>
+				<div class="col-md-5 login-left" style="border:2px solid #F78536; padding: 2% 5%; margin-left: 7%; margin-right: 2%;">
+					<h3 style="color:black">Login</h3>
 					<form action="UserLogin" method="post">
 						<?php if($this->session->flashdata('msg')): ?>
 				    <div class="alert <?php echo $this->session->flashdata('clas') ?> alert-dismissible" role="alert">
@@ -36,12 +31,13 @@
 						<button type="submit" class="btn btn-primary" >Login As User</button>
 					</form>
 				</div>
-				<div class="col-md-6 login-right">
-					<h2 style="color:black">Register Here</h2>
+				<div class="col-md-1"></div>
+				<div class="col-md-5 login-right" style="border:2px solid #F78536; padding: 2% 5%;">
+					<h3 style="color:black">Register Here</h3>
 					<?php if($this->session->flashdata('class')): ?>
 				    <div class="alert <?php echo $this->session->flashdata('class') ?> alert-dismissible" role="alert">
 				      
-				  <span style="margin-left: 180px">
+				  <span style="margin-left: 10px">
 				    <?php echo $this->session->flashdata('message'); ?>
 				  </span>
 				  

@@ -453,7 +453,7 @@ $data['payment_methood']= $this->input->post('payment_methood','true');
                         $addData=$this->modAdmin->addbookPackage($data);
                     if ($addData) {
                        
-                        $this->session->set_flashdata('class','alert-success');
+                $this->session->set_flashdata('class','alert-success');
                    $this->session->set_flashdata('order','You Booked A Package For <span class="btn btn-success">'.$data['delegate'].'</span> Person Booked Date is<span class="btn btn-success"> '.$data['bookingDate'].'</span>  Package Price is <span class="btn btn-danger">'.$data['price'].' </span> (Per Person)');
                     redirect('home/package');
                     }
@@ -672,6 +672,14 @@ $data['payment_methood']= $this->input->post('payment_methood','true');
         $this->load->view('Admin/header');
         $this->load->view('Admin/admin_header');
         $this->load->view('Admin/addGuide',$data);
+        $this->load->view('Admin/admin_footer');
+        $this->load->view('Admin/footer');
+    }
+    public function addAdmin(){
+       $data['allLocation']=$this->modAdmin->fetchaAllLocation();
+        $this->load->view('Admin/header');
+        $this->load->view('Admin/admin_header');
+        $this->load->view('Admin/addAdmin',$data);
         $this->load->view('Admin/admin_footer');
         $this->load->view('Admin/footer');
     }
@@ -937,6 +945,211 @@ $addptype_name=$this->modUser->checkpLocation_nameExistencs($data);
         $this->load->view('Admin/admin_footer');
         $this->load->view('Admin/footer');
     }
+    public function adminAdd(){
+        $data['admin_name']=$this->input->post('admin_name',true);
+        $data['admin_password']=$this->input->post('admin_password',true);
+        $data['admin_email']=$this->input->post('admin_email',true);
+        $chkRegister=$this->modUser->chkAdminRegister($data);
+        if ($chkRegister==0) {
+            $addAdmin=$this->modAdmin->addAdmin($data);
+                if ($addAdmin) {
+                    $this->session->set_flashdata('class','alert-success');
+                    $this->session->set_flashdata('message','An Admin Successfully Added');
+                    redirect('admin/addAdmin');
+                    
+                }
+        }
+        else{
+            $this->session->set_flashdata('class','alert-danger');
+            $this->session->set_flashdata('message','Sorry Your Given User Name Or Password is not unique');
+            redirect('admin/addAdmin');
+
+        }
+
+    }
+     public function viewAdmin(){
+            $data['allGuide']=$this->modAdmin->fetchallAdmin();
+            $this->load->view('Admin/header');
+            $this->load->view('Admin/admin_header');
+            $this->load->view('Admin/viewAdmin',$data);
+            $this->load->view('Admin/admin_footer');
+            $this->load->view('Admin/footer');
+        }
+     public function editAdmin($id){
+       $data['allGuide']=$this->modAdmin->chekAdminById($id);
+            if (count($data['allGuide'])==1) {
+            $this->load->view('Admin/header');
+            $this->load->view('Admin/admin_header');
+            $this->load->view('Admin/editAdmin',$data);
+            $this->load->view('Admin/admin_footer');
+            $this->load->view('Admin/footer');
+                  }
+    }
+    public function updateAdmin(){
+        $data['admin_id']=$this->input->post('admin_id',true);
+        $data['admin_name']=$this->input->post('admin_name',true);
+        $data['admin_email']=$this->input->post('admin_email',true);
+                if (!empty($data['admin_id'])) {
+                    
+            $reply=$this->modAdmin->updateAdmin($data,$data['admin_id']);
+                    if ($reply) {
+                        
+                $this->session->set_flashdata('class','alert-success');
+                $this->session->set_flashdata('message','Admin Updated Successfully');
+                redirect('admin/viewAdmin');
+                        
+                    }
+                    else{
+                        $this->session->set_flashdata('alert-danger','Admin Info not updated now','admin/viewAdmin');
+                    }
+                    # code...
+                }
+                else{
+                    $this->session->set_flashdata('alert-danger','Please Check Every Field','admin/viewAdmin');
+
+                }
+    }
+        public function deleteAdmin($id){
+            if(!empty($id) && isset($id)){
+                  $data=$this->modAdmin->deleteAdmin($id);
+                  if ($data) {
+                    $this->session->set_flashdata('class','alert-success');
+                        $this->session->set_flashdata('message','Admin Delated');
+                        redirect('admin/viewAdmin');
+                    
+                  }
+                  else{
+                   $this->session->set_flashdata('class','alert-danger');
+                   $this->session->set_flashdata('message','Admin not found');
+                    redirect('admin/viewAdmin');
+                  }
+                }
+                else{
+                    $this->session->set_flashdata('class','alert-danger');
+                   $this->session->set_flashdata('message','Admin Name  not found');
+                    redirect('admin/viewAdmin');
+
+
+                }
+
+        }
+        public function forgetPassword(){
+
+            $this->load->view('Admin/forgetPassword');
+
+        }
+        public function chkAdminForForgetPassword(){
+            $data['admin_email']=$this->input->post('admin_email',true);
+             $admin=$this->modAdmin->chkAdminForForgerPassword($data);
+            if (count($admin)==1) {
+                $data['email']=$data['admin_email'];
+       
+        $this->load->library('Phpmailer_lib');
+        try{
+            $mail=$this->phpmailer_lib->load();
+            $mail->setFrom('devolapertest@gmail.com','Travel');
+            $mail->addAddress($data['email']);
+            $mail->Subject='Travel';
+            $edata['ulink']=base_url().'Admin/ChangePassword';
+
+            $mailContent="Hi, click here to verify your email address ".$edata['ulink']." ";
+            $mail->Body=$mailContent;
+            if ($mail->send()) {
+                $this->session->set_flashdata('class','alert-success');
+                $this->session->set_flashdata('message','Check Your Email To Verify');
+                redirect('admin/index');
+            }
+        }
+        catch(Exception $e){
+            echo $mail->ErrorInfo;
+        }
+               
+            }
+            else{
+                $this->session->set_flashdata('class','alert-danger');
+                $this->session->set_flashdata('message','With Wrong Email Your Are Trying');
+                redirect('admin/index');
+            }
+
+        }
+        public function ChangePassword(){
+             $this->load->view('Admin/changePassword');
+
+        }
+        public function updatePassword(){
+            $data['admin_name']=$this->input->post('admin_name',true);
+            $admin=$this->modAdmin->chkAdmin($data);
+            $data['admin_password']=$this->input->post('admin_password',true);
+            if (!empty($data['admin_password'])) {
+                if (count($admin)==1) {
+                    $reply=$this->modAdmin->updateAdminPassword($data,$data['admin_name']);
+                    if ($reply) {
+                         $forSession=array(
+                        'admin_name'=> $admin[0]['admin_name'],
+                        'admin_id'=> $admin[0]['admin_id'],
+                         'logged_in' => TRUE
+                        
+                );
+                    $this->session->set_userdata($forSession);
+                        redirect('admin/deshboard');
+                    }
+                   
+                  
+                }
+                else{
+                $this->session->set_flashdata('class','alert-danger');
+                $this->session->set_flashdata('message','Wrong User Name');
+                redirect('admin/ChangePassword');
+
+                }
+                
+            }
+            else{
+                 $this->session->set_flashdata('class','alert-danger');
+                $this->session->set_flashdata('message','Give A New Password');
+                redirect('admin/ChangePassword');
+            }
+
+        }
+        public function viewAllMessage(){
+            $data['allMessage']=$this->modAdmin->fetchallMessage();
+            $this->load->view('Admin/header');
+            $this->load->view('Admin/admin_header');
+            $this->load->view('Admin/viewAllMessage',$data);
+            $this->load->view('Admin/admin_footer');
+            $this->load->view('Admin/footer');
+
+        }
+        public function deleteMessage($id){
+          
+           $data=$this->modAdmin->deleteMessage($id);
+           redirect('admin/viewAllMessage');
+        }
+            public function deletePlace($id){
+            if(!empty($id) && isset($id)){
+                  $data=$this->modAdmin->deletePlace($id);
+                  if ($data) {
+                    $this->session->set_flashdata('class','alert-success');
+                        $this->session->set_flashdata('message','Place Delated');
+                        redirect('admin/viewPlace');
+                    
+                  }
+                  else{
+                   $this->session->set_flashdata('class','alert-danger');
+                   $this->session->set_flashdata('message','Place not found');
+                    redirect('admin/viewPlace');
+                  }
+                }
+                else{
+                    $this->session->set_flashdata('class','alert-danger');
+                   $this->session->set_flashdata('message','Guide Name  not found');
+                    redirect('admin/viewPlace');
+
+
+                }
+
+        }
+
 
         
 }

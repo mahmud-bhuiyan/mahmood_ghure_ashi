@@ -3,53 +3,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+  
+  public function index()
+  {
+    
+    $data['LastFive']=$this->modUser->fetchLastFive();
+    $data['FirstFive']=$this->modUser->fetchFirstFive();
+
+    $this->load->view('FrontEnd/newHeader');
+    $this->load->view('FrontEnd/newHome',$data);
+    $this->load->view('FrontEnd/newFooter');
+  }
 	
-	public function index()
+	public function index1()
 	{
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
 		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/home',$data);
+		$this->load->view('FrontEnd/navbar',$data);
+		$this->load->view('FrontEnd/home');
 		$this->load->view('FrontEnd/footer');
 	}
+
 	public function package(){
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
 		$data['allPackage']=$this->modAdmin->fetchallPackage();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/package',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newHeader');
+		$this->load->view('FrontEnd/newPackage',$data);
+		$this->load->view('FrontEnd/newFooter');
 	}
 	public function places(){
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
 		$data['placeType']=$this->modAdmin->fetchallPlaceType();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/places',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newHeader');
+		$this->load->view('FrontEnd/newPlace',$data);
+		$this->load->view('FrontEnd/newFooter');
 	}
 	public function guide(){
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
 		$data['allGuide']=$this->modAdmin->fetchallGuide();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/guide',$data);
-		$this->load->view('FrontEnd/footer');
+
+		$this->load->view('FrontEnd/newHeader');
+    $this->load->view('FrontEnd/newGuide',$data);
+    $this->load->view('FrontEnd/newFooter');
 	}
 	public function signin(){
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
+		 $this->load->view('FrontEnd/newHeader');
 		$this->load->view('FrontEnd/signin');
-		$this->load->view('FrontEnd/footer',$data);
+		$this->load->view('FrontEnd/newFooter');
 	}
 	public function guidesignin(){
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
 		$data['allLocation']=$this->modAdmin->fetchaAllLocation();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
+		$this->load->view('FrontEnd/newHeader');
 		$this->load->view('FrontEnd/guidesignin',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newFooter');
 	}
 	public function guideRegistration(){
 		$this->load->helper(array('form', 'url'));
@@ -243,36 +251,32 @@ class Home extends CI_Controller {
     	$data['allPlace']=$this->modAdmin->fetchallPlace();
     	 $data['package']=$this->modAdmin->chekPackageById($id);
     	 $data['user']=$this->modAdmin->chekUserById($userId);
-    	$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
+    	$this->load->view('FrontEnd/newHeader');
 		$this->load->view('FrontEnd/packageBooking',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newFooter');
     }
     public function fetchCatById($id){
-    	$data['allPlace']=$this->modUser->fetchallPlaceById($id);
+    $data['allPlace']=$this->modUser->fetchallPlaceById($id);
 		$data['placeType']=$this->modAdmin->fetchallPlaceType();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/places',$data);
+		$this->load->view('FrontEnd/newHeader');
+		$this->load->view('FrontEnd/newPlace',$data);
 		$data['allPlace']=$this->modAdmin->fetchallPlace();
-		$this->load->view('FrontEnd/footer',$data);
+		$this->load->view('FrontEnd/newFooter',$data);
     }
     public function fetchGuideByPlaceName($name){
         $data['allPlace']=$this->modAdmin->fetchallPlace();
 		$data['allGuide']=$this->modAdmin->fetchallGuideByName($name);
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
-		$this->load->view('FrontEnd/guide',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newHeader');
+		$this->load->view('FrontEnd/newGuide',$data);
+		$this->load->view('FrontEnd/newFooter');
 
     }
     public function customerPackage(){
     	$data['allPlace']=$this->modAdmin->fetchallPlace();
     	$data['allBookedPackage']=$this->modUser->fetchallBookedPackageByUserId();
-		$this->load->view('FrontEnd/header');
-		$this->load->view('FrontEnd/navbar');
+		$this->load->view('FrontEnd/newHeader');
 		$this->load->view('FrontEnd/customerPackage',$data);
-		$this->load->view('FrontEnd/footer');
+		$this->load->view('FrontEnd/newFooter');
     }
     public function guideBooking($guide_id){
     	$chkRegister=$this->modUser->chkbookedGuidByid($guide_id);
@@ -298,16 +302,20 @@ class Home extends CI_Controller {
     public function customerRequestToGuide(){
       $data['allPlace']=$this->modAdmin->fetchallPlace();
       $data['allBookedPackage']=$this->modUser->customerRequestToGuideById();
-      $this->load->view('FrontEnd/header');
-	  $this->load->view('FrontEnd/navbar');
+      $this->load->view('FrontEnd/newHeader');
 	  $this->load->view('FrontEnd/customerRequestToGuide',$data);
-	  $this->load->view('FrontEnd/footer');
+	  $this->load->view('FrontEnd/newFooter');
     }
     public function acceptRequestOfCustomer($id){
       $chkRegister=$this->modUser->chkguideBook();
       if ($chkRegister==0) {
+       
       	$data['state']='1';
         $updateAdmin=$this->modUser->updateGuideBookToOne($data,$id);
+        redirect('home/customerRequestToGuide');
+      }
+      else{
+         
         redirect('home/customerRequestToGuide');
       }
     }
@@ -326,9 +334,64 @@ class Home extends CI_Controller {
     public function customerWithGuide(){
     $data['allPlace']=$this->modAdmin->fetchallPlace();
       $data['allBookedPackage']=$this->modUser->customerWithGuide();
-      $this->load->view('FrontEnd/header');
-	  $this->load->view('FrontEnd/navbar');
+      $this->load->view('FrontEnd/newHeader');
 	  $this->load->view('FrontEnd/customerWithGuide',$data);
-	  $this->load->view('FrontEnd/footer');
+	  $this->load->view('FrontEnd/newFooter');
+    }
+    public function contact(){
+       $data['allPlace']=$this->modAdmin->fetchallPlace();
+        $data['allPackage']=$this->modAdmin->fetchallPackage();
+        $this->load->view('FrontEnd/newHeader');
+        $this->load->view('FrontEnd/contact',$data);
+        $this->load->view('FrontEnd/newFooter');
+
+    }
+    public function userMessage(){
+             $data['sender_name']=$this->input->post('sender_name',true);
+             $data['sender_email']=$this->input->post('sender_email',true);
+             $data['msg_body']=$this->input->post('msg_body',true);
+             $add_message=$this->modUser->addMessage($data);
+             $this->session->set_flashdata('class','alert-success');
+            $this->session->set_flashdata('message','Your Message Sent Successfully');
+            redirect('home/contact');
+
+        }
+    public function ratingDown($user_id,$guide_id){
+      $data['user_id']=$user_id;
+      $data['guide_id']=$guide_id;
+      $checkDown=$this->modUser->checkDown($data);
+      if (count($checkDown)==0) {
+        $data['down']=1;
+        $add_down=$this->modUser->adddown($data);
+        redirect('home/guide');
+         
+      }
+      else{
+        redirect('home/guide');
+      }
+
+    }
+     public function ratingUp($user_id,$guide_id){
+      $data['user_id']=$user_id;
+      $data['guide_id']=$guide_id;
+      $checkUp=$this->modUser->checkUp($data);
+      if (count($checkUp)==0) {
+        $data['up']=1;
+        $add_down=$this->modUser->addUp($data);
+        redirect('home/guide');
+         
+      }
+      else{
+        redirect('home/guide');
+      }
+
+    }
+    public function packageDetails($id){
+      $data['packageDetails']=$this->modUser->packageDetails($id);
+     
+      $this->load->view('FrontEnd/newHeader');
+      $this->load->view('FrontEnd/packageDetails',$data);
+      $this->load->view('FrontEnd/newFooter');
+
     }
 }

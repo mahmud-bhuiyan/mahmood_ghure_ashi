@@ -17,10 +17,7 @@
   
  
  
-  <div class="card-body">
-    <a href="<?php echo base_url('home/guidesignin') ?>" class="btn btn-success">Register As A Guide</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-    <a href="<?php echo base_url('home/guidesignin') ?>" class="btn btn-info">Sign in</a>
-  </div>
+  
 </div>
 
     </div>
@@ -54,12 +51,12 @@
 		<div class="col-lg-4">
 			<div class="card" >
   <img class="card-img-top" style="height: 200px" src="<?php echo base_url('assets/images/'.$p->pic) ?>" alt="Card image cap">
-  <div class="card-body">
-    <center><h5 class="card-title" style="color:green;font-weight: bold"><?php echo $p->name ?></h5></center>
+  <div class="card-body pt-2">
+    <center><h5 class="card-title" style="color:#337ab7;font-weight: bold"><?php echo $p->name ?></h5></center>
     <h6 class="card-text" style="color:black">Nationality- <?php echo $p->nationality ?></h6>
     <h6 class="card-text" style="color:black">Address- <?php echo $p->address ?></h6>
     <h6 class="card-text" style="color:black">Mobaile- <span style="color:#643153">0<?php echo $p->mobailenumber ?></span> </h6>
-    <h6 class="card-text" style="color:black">Guided Area- <span style="color: green;font-weight: bold"><?php echo $p->area ?></span> </h6>
+    <h6 class="card-text" style="color:black">Guided Area- <span style="color: #337ab7;font-weight: bold"><?php echo $p->area ?></span> </h6>
   </div>
  
   <div class="card-body">
@@ -73,7 +70,48 @@
 
 
      ?>" class="btn btn-primary">Book Him</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-    
+     <?php if ($this->session->userdata('id')) {
+       # code...
+      ?>
+     <a href="<?php echo base_url('home/ratingUp/'.$this->session->userdata('id').'/'.$p->id) ?>" style="color:black">
+    <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+    </a>
+    <?php 
+     $up=$this->modUser->fetchallUp($p->id);
+     ?>
+     <span style="color:#337ab7;font-weight: bold"><?php echo count($up); ?></span>
+  <?php }else{ ?>
+    <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+     <?php 
+     $up=$this->modUser->fetchallUp($p->id);
+     ?>
+     <span style="color:#337ab7;font-weight: bold"><?php echo count($up); ?></span>
+  <?php } ?>
+
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <?php 
+    if ($this->session->userdata('id')) {
+      
+   
+     ?>
+    <a href="<?php echo base_url('home/ratingDown/'.$this->session->userdata('id').'/'.$p->id) ?>
+    " style="color: black">
+    <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
+    </a>
+    <?php 
+     $down=$this->modUser->fetchallDown($p->id);
+     ?>
+     <span style="color:red;font-weight: bold"><?php echo count($down); ?></span>
+
+  <?php 
+
+}else{ ?>
+    <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
+     <?php 
+     $down=$this->modUser->fetchallDown($p->id);
+     ?>
+     <span style="color:red;font-weight: bold"><?php echo count($down); ?></span>
+  <?php } ?>
   </div>
 </div>
 		</div>

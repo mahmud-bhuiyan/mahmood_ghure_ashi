@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> Travel</title>
+  <title>Ghure Ashi</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo base_url('assets/Admin/vendors/ti-icons/css/themify-icons.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/Admin/vendors/base/vendor.bundle.base.css'); ?>">

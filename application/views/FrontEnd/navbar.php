@@ -5,23 +5,22 @@
   
   <!-- Header -->
 
-  <header class="header" style="background-color:#595959;margin-top: -2%;padding-bottom: -3%">
+  <header class="header" style="background-color:#595959">
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="header_content d-flex flex-row align-items-center justify-content-start">
             <div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-              <div class="logo"><a href="">Travel</a></div>
+              <div class="logo"><a href="">Ghure Ashi</a></div>
               <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-start justify-content-start">
 
-                  <li class="active"><a href="<?php echo base_url('home') ?>">Home</a></li>
+                  <li><a href="<?php echo base_url('home') ?>">Home</a></li>
+                  
+                  <?php if ($this->session->userdata('id')) { ?>
                   <li><a href="<?php echo base_url('home/package') ?>">Packages</a></li>
                   <li><a href="<?php echo base_url('home/places') ?>">Places</a></li>
                   <li><a href="<?php echo base_url('home/guide') ?>">Guide</a></li>
-                  <?php if ($this->session->userdata('id')) {
-                   
-                   ?>
                    <div class="dropdown">
     <button class="dropbtn"><i style="font-size: 20px" class="fa fa-user-circle"></i> 
       <i class="fa fa-caret-down"></i>
@@ -42,7 +41,7 @@
     </div>
   </div>
                    
-                <?php } elseif($this->session->userdata('User_type')) {?>
+                <?php } elseif($this->session->userdata('User_type')) { ?>
 
                   <div class="dropdown">
     <button class="dropbtn"><i style="font-size: 20px" class="fa fa-user-circle"></i> 
@@ -57,7 +56,18 @@
    
         </div>  
               <?php } else{ ?>
-             <li><a style="color:#ffff" href="<?php echo base_url('home/signin') ?>">Signin</a></li>
+                  <div class="dropdown">
+    <li><a style="color:#ffff" href="<?php echo base_url('home/signin') ?>">Signin</a></li>
+    <div class="dropdown-content">
+      <a style="" href="<?php echo base_url('home/signin') ?>">User Signin</a>
+      <a style="" href="<?php echo base_url('home/guidesignin') ?>">Guide Signin</a>
+      
+      
+    </div>
+   
+        </div>  
+    
+     <li><a style="color:#ffff" href="<?php echo base_url('home/contact') ?>">Contact</a></li>
            <?php } ?>
                 </ul>
               </nav>

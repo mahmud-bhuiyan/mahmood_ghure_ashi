@@ -5,7 +5,7 @@
 <br>
 <br>
 
-<dir class="col-lg-12" ><center><h3 style="color: #563d7c;">Explore Best Place From Beautiful Bangladesh</h3></center></dir>
+<div class="col-lg-12" ><center><h2 style="color: #563d7c;margin-top:3%;margin-bottom:3%">Explore Best Place From Beautiful Bangladesh</h2></center></div>
 <div class="container">
 	<div class="row">
 		<?php 
@@ -33,13 +33,13 @@
                 
 			 ?>
 			<br>
-			<h3 style="color: #563d7c;margin-top: 8%">Different Type of Place</h3>
+			<h3 style="color: #563d7c;margin-top: 8%">Available Place</h3>
 		<ul class="list-group list-group-flush" style="color:black">
 				<?php if ($placeType) {
 					foreach ($placeType as $p) {
 						
 				 ?>
-		<li class="list-group-item" style="font-weight: bold;color:black"><a style="color: black" href="<?php echo base_url('home/fetchCatById/'.$p->id) ?>"><?php echo $p->ptype_name; ?></a></li>
+		<li class="list-group-item" style="font-weight: bold;color:black"><a style="color: black" href="<?php echo base_url('home/fetchCatById/'.$p->ptype_name) ?>"><?php echo $p->ptype_name; ?></a></li>
 				
 			
 		<?php }
@@ -81,7 +81,7 @@
 					foreach ($placeType as $p) {
 						
 				 ?>
-		<li class="list-group-item" style="font-weight: bold;color:black"><a style="color: black" href="<?php echo base_url('home/fetchCatById/'.$p->id) ?>"><?php echo $p->ptype_name; ?></a></li>
+		<li class="list-group-item" style="font-weight: bold;color:black"><a style="color: black" href="<?php echo base_url('home/fetchCatById/'.$p->ptype_name) ?>"><?php echo $p->ptype_name; ?></a></li>
 				
 			
 		<?php }

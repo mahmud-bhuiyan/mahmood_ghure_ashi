@@ -1,13 +1,8 @@
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 <div class="container">
-	<div class="row">
+	<div class="row" style="margin-top: 3%;">
 		<div class="col-lg-12">
 			<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -19,7 +14,7 @@
           <h4 class="modal-title">BKash Payment System</h4>
         </div>
         <div class="modal-body">
-          <p>Personal Number:01748613498(Send Money)</p>
+          <p>Personal Number:098765432(Send Money)</p>
           <p>-Type Your User Name And Mobaile Number in Refference</p>
           <p>-Untill Payment Clear,Booking will be on pending</p>
         </div>
@@ -32,7 +27,7 @@
   </div>
 			
 			<table class="table">
-				
+			<h2 class="modal-title text-center" style="margin-bottom: 2%;color:#F78536;">Package Booking</h2>	
   <thead>
     <tr>
     
@@ -42,7 +37,10 @@
       <th scope="col">Delegate</th>
       <th scope="col">Package price(Per Person)</th>
       <th scope="col">Payment Methood</th>
-      <th scope="col" colspan="2">Action</th>
+      <th scope="col" colspan="2">
+        <center>Action</center>
+      
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -56,17 +54,19 @@
 			<td style="height: 200px">
 		<input class="form-control rounded-0" id="exampleFormControlTextarea1"  name="user_name" value="<?php echo $user[0]['user_name'] ?>" readonly>
 			</td>
-			<td style="height: 200px">
-		<input class="form-control rounded-0" id="exampleFormControlTextarea1"  name="package_name" value="<?php echo $package[0]['package_name'] ?>" readonly >
+			<td style="height: 200px; width: 180px;">
+		    <input class="form-control rounded-0" id="exampleFormControlTextarea1"  name="package_name" value="<?php echo $package[0]['package_name'] ?>" readonly >
 			</td>
-			<td style="height: 200px"><input class="form-control rounded-0" type="date" id="to" name="to"/>
-				<td style="height: 200px"><input class="form-control rounded-0" type="int"  onkeypress="restrictMinus(event); if(this.value.length==2) return false;" name="delegate" />
+
+			<td style="height: 200px; width: 80px;"><input class="form-control rounded-0" type="date" id="to" name="to"/>
+
+			<td style="height: 200px;width: 90px;"><input class="form-control rounded-0" type="int"  onkeypress="restrictMinus(event); if(this.value.length==2) return false;" name="delegate" />
 
 			</td>
-			<td style="height: 200px">
+			<td style="height: 200px; width: 90px;">
 		<input class="form-control rounded-0" id="exampleFormControlTextarea1"  name="package_price" value="<?php echo $package[0]['price'] ?>" readonly>
 			</td>
-			<td style="height: 200px">
+			<td style="height: 200px;">
 		
       <select class="form-control" id="myselect" name="payment_methood">
         <option value="1" selected>Cash</option>
@@ -74,12 +74,6 @@
       </select>
    
 			</td>
-			
-			
-			
-			
-			
-
 				<td>
 				<?php echo form_submit('Update','Confirm Booking','class="btn btn-primary"'); ?>
 			</td>

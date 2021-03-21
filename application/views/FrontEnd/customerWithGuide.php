@@ -1,16 +1,12 @@
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
       <br>
 
       <center>
-      <h2 >Booked Guide</h2>
+      <h2 style="color:#F78536" >Booked Guide</h2>
       <?php if ($this->session->flashdata('class')): ?>
         <div class="alert <?php echo $this->session->flashdata('class') ?> alert-dismissible" role="alert">
 

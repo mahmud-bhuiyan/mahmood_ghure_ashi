@@ -4,7 +4,7 @@
     <!--Material textarea-->
 
   <?php echo form_open_multipart('Admin/placeTypeAdd','','') ?>
-  <h2>Add Place Type</h2>
+  <h2>Add Place Type (Districts)</h2>
   <div>
       <?php if ($this->session->flashdata('class')): ?>
         <div class="alert <?php echo $this->session->flashdata('class') ?> alert-dismissible" role="alert">

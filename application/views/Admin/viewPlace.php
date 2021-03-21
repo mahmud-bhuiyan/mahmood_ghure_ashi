@@ -53,7 +53,7 @@
        ?>
       <td><?php echo $descri ?></td>
       <td><button class="btn btn-success"><a style="color:#ffff" href="<?php echo base_url('admin/editPlace/'.$p->id) ?>">Edit</a></button></td> 
-      <td><button class="btn btn-danger"><a style="color:#ffff" href="<?php echo base_url('admin/deleteGuide/'.$p->id) ?>">Delete</a></button></td>
+      <td><button class="btn btn-danger"><a style="color:#ffff" href="<?php echo base_url('admin/deletePlace/'.$p->id) ?>">Delete</a></button></td>
       
     </tr>
 <?php } ?>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bongo Traveller</title>
+  <title>Ghure Ashi</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->  
@@ -38,7 +38,7 @@
           </span>
 
           <span class="login100-form-title p-b-34 p-t-27">
-            Log in
+            Admin Log in
           </span>
           <?php if ($this->session->flashdata('class')): ?>
         <div class="alert <?php echo $this->session->flashdata('class') ?> alert-dismissible" role="alert">
@@ -66,9 +66,12 @@
           </div>
 
           <div class="contact100-form-checkbox">
-            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-            <label class="label-checkbox100" for="ckb1">
-              Remember me
+            <input class="input-checkbox100"  name="remember-me">
+            <label class="" >
+              <a href="<?php echo site_url('Admin/forgetPassword') ?>" style="color:white">
+                Forgot Password?
+              </a>
+               
             </label>
           </div>
 
@@ -78,11 +81,7 @@
             </button>
           </div>
 
-          <div class="text-center p-t-90">
-            <a class="txt1" href="#">
-              Forgot Password?
-            </a>
-          </div>
+         
         </form>
       </div>
     </div>

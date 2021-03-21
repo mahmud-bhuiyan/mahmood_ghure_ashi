@@ -4,7 +4,7 @@
       <br>
 
       <center>
-      <h2 >Place Type</h2>
+      <h2 >Place Type (Districts)</h2>
       <?php if ($this->session->flashdata('class')): ?>
         <div class="alert <?php echo $this->session->flashdata('class') ?> alert-dismissible" role="alert">
 
